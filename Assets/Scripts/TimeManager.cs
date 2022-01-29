@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
 using UnityEngine.UIElements;
+using TMPro;
 
 public enum TimeManagerState
 {
@@ -15,6 +16,14 @@ public enum TimeManagerState
 
 public class TimeManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI currentStateText;
+
+    [SerializeField] string stoppedStateText = "Get Ready To Vote...";
+    [SerializeField] string votingOpenStateText = "Voting Open!";
+    [SerializeField] string countingVotesStateText = "Counting Votes...";
+    [SerializeField] string movingCarStateText = "Democracy in Progress...";
+
     [SerializeField] float CountInTime = 15f;
     [SerializeField] float VoteTime = 25f;
     [SerializeField] float VotingClosedTime = 15f; // 15s
@@ -36,27 +45,39 @@ public class TimeManager : MonoBehaviour
         democracyManager = GameObject.FindObjectOfType<DemocracyManager>();
         obstacleManager = GameObject.FindObjectOfType<ObstacleManager>();
         car = GameObject.FindObjectOfType<Car>();
+
+        currentStateText.text = stoppedStateText;
     }
 
     // Update is called once per frame
     void Update()
     {
+        TimeRemainingOnCurrentSection -= Time.deltaTime;
+        TimeRemainingOnCurrentSection = Mathf.Clamp(TimeRemainingOnCurrentSection, 0f, float.PositiveInfinity);
+
+        timerText.text = TimeRemainingOnCurrentSection.ToString("0");
     }
 
     void ChangeStateIntoVotingOpen()
     {
         TimerState = TimeManagerState.VotingOpen;
         democracyManager.OnVotingOpen();
+        currentStateText.text = votingOpenStateText;
+        TimeRemainingOnCurrentSection = VoteTime;
+        Invoke("ChangeStateIntoCountingVotes", VoteTime);
     }
 
-    void ChangeStateIntoVotingClosed()
+    void ChangeStateIntoCountingVotes()
     {
-
+        currentStateText.text = countingVotesStateText;
+        TimeRemainingOnCurrentSection = VotingClosedTime;
+        Invoke("ChangeStateIntoMovingCar", VotingClosedTime);
     }
 
     void ChangeStateIntoMovingCar()
     {
-        democracyManager.OnVotingClose();
-        democracyManager.OnTallyVotes(out var winner);
+        democracyManager.CloseVoting();
+        democracyManager.TallyVotes(out var winner);
+        currentStateText.text = movingCarStateText;
     }
 }

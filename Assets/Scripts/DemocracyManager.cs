@@ -49,12 +49,12 @@ public class DemocracyManager : MonoBehaviour
 
     }
 
-    public void OnVotingClose()
+    public void CloseVoting()
     {
 
     }
 
-    public void OnTallyVotes(out Vote winner)
+    public void TallyVotes(out Vote winner)
     {
         winner = Vote.Unset;
     }
