@@ -24,9 +24,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] string countingVotesStateText = "Counting Votes...";
     [SerializeField] string movingCarStateText = "Democracy in Progress...";
 
-    [SerializeField] float CountInTime = 15f;
-    [SerializeField] float VoteTime = 25f;
-    [SerializeField] float VotingClosedTime = 15f; // 15s
+    [SerializeField] public float CountInTime = 15f;
+    [SerializeField] public float VoteTime = 25f;
+    [SerializeField] public float VotingClosedTime = 15f; // 15s
 
     public TimeManagerState TimerState = TimeManagerState.Stopped;
 
@@ -79,5 +79,9 @@ public class TimeManager : MonoBehaviour
         democracyManager.CloseVoting();
         democracyManager.TallyVotes(out var winner);
         currentStateText.text = movingCarStateText;
+        if (winner == Vote.Lane1 || winner == Vote.Lane2 || winner == Vote.Lane3 || winner == Vote.Lane4)
+        {
+            car.ExecuteVote(winner);
+        }
     }
 }

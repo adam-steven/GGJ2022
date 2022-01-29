@@ -17,4 +17,22 @@ public class Car : MonoBehaviour
     {
         
     }
+
+    public void ExecuteVote(Vote v)
+    {
+        switch (v)
+        {
+            case Vote.Lane1:
+                break;
+            case Vote.Lane2:
+                break;
+            case Vote.Lane3:
+                break;
+            case Vote.Lane4:
+                break;
+            default:
+                Debug.LogWarning("This vote result is not processed by the car script.");
+                break;
+        }
+    }
 }
