@@ -26,13 +26,13 @@ public class Car : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
                 break;
             case Vote.Lane2:
-                transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+                transform.position = new Vector3(transform.position.x, transform.position.y, 1f);
                 break;
             case Vote.Lane3:
-                transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+                transform.position = new Vector3(transform.position.x, transform.position.y, 2f);
                 break;
             case Vote.Lane4:
-                transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+                transform.position = new Vector3(transform.position.x, transform.position.y, 3f);
                 break;
             default:
                 Debug.LogWarning("This vote result is not processed by the car script.");
