@@ -13,14 +13,14 @@ public class PlayButtonController : MonoBehaviour
 
     void Start()
     {
-        string user = PlayerPrefs.GetString("twitchUser").Trim();
-        string pass = PlayerPrefs.GetString("twitchToken").Trim();
-        bool noUserPrevEntered = user.Any(x => !char.IsLetter(x));
+        string user = PlayerPrefs.GetString("twitchUser");
+        string pass = PlayerPrefs.GetString("twitchToken");
+        bool noUserPrevEntered = user.Length < 3;
 
         if (!noUserPrevEntered)
         {
-            username.text = PlayerPrefs.GetString("twitchUser");
-            passowrd.text = PlayerPrefs.GetString("twitchToken");
+            username.text = user;
+            passowrd.text = pass;
         }
     }
 
