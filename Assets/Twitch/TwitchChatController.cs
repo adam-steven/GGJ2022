@@ -16,14 +16,18 @@ public class TwitchChatController : MonoBehaviour
     const string url = "irc.chat.twitch.tv";
     const int port = 6667;
 
-    string user = "GGJ2022_TwitchDriving";
-    static string oauth = "oauth:89kt3g7rtdb9bnp6leyot4fnmi4ekd";
-    string channel = "Kall_Me_Klik";
+    string user = "";
+    string oauth = "";
+    string channel = "";
 
     float pingCounter = 0;
 
     private void Awake()
     {
+        user = PlayerPrefs.GetString("twitchUser");
+        oauth = PlayerPrefs.GetString("twitchToken");
+        channel = PlayerPrefs.GetString("twitchUser");
+
         ConnectToTwitch();
     }
 
