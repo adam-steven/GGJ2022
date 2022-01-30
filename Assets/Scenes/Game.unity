@@ -987,9 +987,9 @@ MonoBehaviour:
   votingOpenStateText: Voting Open!
   countingVotesStateText: Counting Votes...
   movingCarStateText: Democracy in Progress...
-  CountInTime: 1
-  voteTime: 3
-  VotingClosedTime: 1
+  CountInTime: 10
+  voteTime: 25
+  VotingClosedTime: 15
   TimerState: 0
   TimeRemainingOnCurrentSection: 0
 --- !u!4 &1275686729
