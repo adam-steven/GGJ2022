@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610f83e6a77305b448a4c3a73752bc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedIncrease: -1
-  pointIncrease: -1
+  speedIncrease: 3
+  pointIncrease: 2
   isGameOverObstacle: 0
 --- !u!1001 &159150790256719155
 PrefabInstance:

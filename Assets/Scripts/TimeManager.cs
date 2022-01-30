@@ -25,7 +25,19 @@ public class TimeManager : MonoBehaviour
     [SerializeField] string movingCarStateText = "Democracy in Progress...";
 
     [SerializeField] public float CountInTime = 15f;
-    [SerializeField] public float VoteTime = 25f;
+    [SerializeField] private float voteTime = 25f;
+    public float VoteTime
+    {
+        get
+        {
+            return voteTime;
+        }
+        set
+        {
+            voteTime = value;
+            voteTime = Mathf.Clamp(voteTime, 10f, 9999f);
+        }
+    }
     [SerializeField] public float VotingClosedTime = 15f; // 15s
 
     public TimeManagerState TimerState = TimeManagerState.Stopped;
@@ -66,7 +78,7 @@ public class TimeManager : MonoBehaviour
         currentStateText.text = votingOpenStateText;
         TimeRemainingOnCurrentSection = VoteTime;
         Invoke("ChangeStateIntoCountingVotes", VoteTime);
-        obstacleManager.SetAdvanceSpeed((((obstacleManager.segmentsPerLane - 1.5f) * obstacleManager.segmentPrefabSize)) / (VoteTime + VotingClosedTime));
+        obstacleManager.SetAdvanceSpeed((((obstacleManager.segmentsPerLane - 3f) * obstacleManager.segmentPrefabSize)) / (VoteTime + VotingClosedTime));
     }
 
     void ChangeStateIntoCountingVotes()
@@ -85,10 +97,18 @@ public class TimeManager : MonoBehaviour
         {
             car.ExecuteVote(winner);
         }
+        else if (winner == Vote.SpeedUp)
+        {
+            VoteTime -= 1f;
+        }
+        else if (winner == Vote.SlowDown)
+        {
+            VoteTime += 1f;
+        }
     }
 
     public void TransitionIntoNewObstacle()
     {
-        
+        ChangeStateIntoVotingOpen();
     }
 }
