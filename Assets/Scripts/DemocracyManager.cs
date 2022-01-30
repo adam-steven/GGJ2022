@@ -56,6 +56,31 @@ public class DemocracyManager : MonoBehaviour
 
     public void TallyVotes(out Vote winner)
     {
-        winner = Vote.Unset;
+        ChoiceHandeler ch = this.GetComponent<ChoiceHandeler>();
+        string voteDesition = ch.GetDecision();
+
+        switch (voteDesition) {
+            case "1":
+                winner = Vote.Lane1;
+                break;
+            case "2":
+                winner = Vote.Lane2;
+                break;
+            case "3":
+                winner = Vote.Lane3;
+                break;
+            case "4":
+                winner = Vote.Lane4;
+                break;
+            case "faster":
+                winner = Vote.SpeedUp;
+                break;
+            case "slower":
+                winner = Vote.SlowDown;
+                break;
+            default:
+                winner = Vote.None;
+                break;
+        }
     }
 }
