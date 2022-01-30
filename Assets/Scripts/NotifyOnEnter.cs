@@ -9,7 +9,7 @@ public class NotifyOnEnter : MonoBehaviour
     public MonoBehaviour ScriptToNotify;
     public string FunctionName;
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag(ObjectTag))
         {

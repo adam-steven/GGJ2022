@@ -47,6 +47,7 @@ public class TimeManager : MonoBehaviour
         car = GameObject.FindObjectOfType<Car>();
 
         currentStateText.text = stoppedStateText;
+
     }
 
     // Update is called once per frame
@@ -65,6 +66,7 @@ public class TimeManager : MonoBehaviour
         currentStateText.text = votingOpenStateText;
         TimeRemainingOnCurrentSection = VoteTime;
         Invoke("ChangeStateIntoCountingVotes", VoteTime);
+        obstacleManager.SetAdvanceSpeed((((obstacleManager.segmentsPerLane - 1.5f) * obstacleManager.segmentPrefabSize)) / (VoteTime + VotingClosedTime));
     }
 
     void ChangeStateIntoCountingVotes()
@@ -83,5 +85,10 @@ public class TimeManager : MonoBehaviour
         {
             car.ExecuteVote(winner);
         }
+    }
+
+    public void TransitionIntoNewObstacle()
+    {
+        
     }
 }
