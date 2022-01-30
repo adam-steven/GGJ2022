@@ -7,7 +7,7 @@ public class ChoiceHandeler : MonoBehaviour
 {
     private List<string> alreadyVotedUsers = new List<string>();
 
-    private string[] commands = { "!1", "!2", "!3", "!4", "!faster", "!slower" };
+    private string[] commands = { "1", "2", "3", "4", "faster", "slower" };
     private int[] voteTally = { 0, 0, 0, 0, 0, 0 };
     public void OnChatMessage(string user, string msg)
     {
@@ -33,9 +33,9 @@ public class ChoiceHandeler : MonoBehaviour
             }
         }
         
-        if(value.ToLower().Contains("!random"))
+        if(value.ToLower().Contains("random"))
         {
-            string randomVote = "!" + Random.Range(1, 5).ToString();
+            string randomVote = Random.Range(1, 5).ToString();
             return AddVote(randomVote);
         }
 
